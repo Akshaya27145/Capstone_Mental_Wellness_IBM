@@ -1,0 +1,18 @@
+{
+  "patient": {
+    "email": "patient1@example.com",
+    "password": "DemoPass123!"
+  },
+  "patient2": {
+    "email": "patient2@example.com",
+    "password": "DemoPass123!"
+  },
+  "therapist": {
+    "email": "therapist1@example.com",
+    "password": "DemoPass123!"
+  },
+  "inactivePatient": {
+    "email": "inactive@example.com",
+    "password": "DemoPass123!"
+  }
+}

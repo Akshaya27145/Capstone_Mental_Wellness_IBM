@@ -1,0 +1,235 @@
+:root {
+  --bg: #f4f7f6;
+  --surface: #ffffff;
+  --primary: #2d6a6a;
+  --primary-dark: #1f4d4d;
+  --accent: #7fb069;
+  --text: #1c2824;
+  --muted: #5c6f69;
+  --border: #d8e3df;
+  --danger: #c44536;
+  --warning: #c9a227;
+  --radius: 14px;
+  --shadow: 0 12px 40px rgba(29, 74, 66, 0.08);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(1200px 600px at 10% -10%, #d9efe8 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #e3ebe4 0%, transparent 50%), var(--bg);
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  background: var(--surface);
+  width: 100%;
+}
+
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 3rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.brand {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--primary-dark);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-weight: 600;
+  background: var(--primary);
+  color: #fff;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn.secondary {
+  background: #e8f1ee;
+  color: var(--primary-dark);
+}
+
+.btn.secondary:hover {
+  background: #dbe8e3;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(45, 106, 106, 0.08);
+  padding: 1.25rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+[data-testid='therapist-list'],
+[data-testid='appointment-list'] {
+  min-height: 2rem;
+}
+
+@media (min-width: 720px) {
+  .grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.therapist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #e6f2ef;
+  color: var(--primary-dark);
+  margin-right: 0.35rem;
+}
+
+.alert {
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.alert.error {
+  background: #fdecea;
+  color: #7a1e12;
+  border: 1px solid #f5c4bc;
+}
+
+.alert.success {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #c8e6c9;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.slot-btn {
+  text-align: left;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.85rem;
+  background: var(--surface);
+}
+
+.slot-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.slot-btn.selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(45, 106, 106, 0.2);
+}
+
+.mock-session {
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, #1a2f2c, #0f1c1a);
+  color: #e8f5f0;
+  padding: 1.5rem;
+  min-height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mock-session::after {
+  content: '';
+  position: absolute;
+  inset: -40% 40% auto -20%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(127, 176, 105, 0.35), transparent 55%);
+  pointer-events: none;
+}

@@ -1,0 +1,37 @@
+CalmCare Playwright Automation — Architecture (Text Diagram)
+===========================================================
+
++-------------------+       +----------------------+
+|  playwright.config|       |  fixtures/*.json      |
+|  (Chrome project, |       |  (users, future data)|
+|   baseURL, report)|       +----------+-----------+
++---------+---------+                  |
+          |                            |
+          v                            v
++---------+---------+       +--------+----------+
+|  tests/*.spec.js  |       |  utils/            |
+|  (describe/test)  |       |  config, waits,     |
++---------+---------+       |  screenshotHelper,  |
+          |                 |  testData loader    |
+          |                 +--------+----------+
+          |                            ^
+          v                            |
++---------+---------+       +--------+----------+
+|  pages/ (POM)     |<------|  Page classes wrap  |
+|  LoginPage, etc.  |       |  selectors (data-   |
++-------------------+       |  testid preferred)  |
+                            +---------------------+
+
+Flow:
+  spec -> Page Object -> Browser (Chromium) -> App (Vite :5173) -> API proxy -> Express :4000 -> MySQL
+
+Reporting:
+  npx playwright show-report  ->  e2e/playwright-report/
+
+Parallelism:
+  fullyParallel: true  (workers per machine)
+
+Constraints honored:
+  - UI-only (no direct API tests in suite)
+  - Chrome/Chromium only
+  - Screenshots on failure (Playwright built-in) + optional named helper in utils/

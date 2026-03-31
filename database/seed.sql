@@ -1,0 +1,2 @@
+-- Optional supplemental seed — primary seed runs via `npm run seed` in server (bcrypt hashes).
+-- This file can be empty if using Node seed only.
