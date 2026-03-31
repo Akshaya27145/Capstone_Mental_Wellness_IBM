@@ -38,6 +38,10 @@ jobs:
         working-directory: e2e
         continue-on-error: true
 
+      - name: Ensure Allure results directory exists
+        if: always()
+        run: mkdir -p e2e/allure-results
+
       - name: Load previous Allure history
         uses: actions/checkout@v4
         if: always()
