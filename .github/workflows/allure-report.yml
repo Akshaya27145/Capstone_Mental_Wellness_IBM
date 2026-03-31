@@ -30,17 +30,33 @@ jobs:
         working-directory: e2e
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium firefox webkit
         working-directory: e2e
 
-      - name: Run Playwright tests (Allure results)
-        run: npx playwright test
+      - name: Prepare Allure results folder
         working-directory: e2e
-        continue-on-error: true
+        if: always()
+        run: |
+          rm -rf allure-results/*
 
       - name: Ensure Allure results directory exists
         if: always()
         run: mkdir -p e2e/allure-results
+
+      - name: Run Playwright tests (chromium)
+        run: npx playwright test --project=chromium
+        working-directory: e2e
+        continue-on-error: true
+
+      - name: Run Playwright tests (firefox)
+        run: npx playwright test --project=firefox
+        working-directory: e2e
+        continue-on-error: true
+
+      - name: Run Playwright tests (webkit)
+        run: npx playwright test --project=webkit
+        working-directory: e2e
+        continue-on-error: true
 
       - name: Load previous Allure history
         uses: actions/checkout@v4
