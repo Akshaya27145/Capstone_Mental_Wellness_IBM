@@ -41,7 +41,17 @@ jobs:
             client/package-lock.json
 
       - name: Create server .env for CI
-        run: cp server/.env.example server/.env
+        run: |
+          cat > server/.env <<'EOF'
+          PORT=4000
+          DB_HOST=127.0.0.1
+          DB_PORT=3306
+          DB_USER=root
+          DB_PASSWORD=1234
+          DB_NAME=wellness_booking
+          JWT_SECRET=change_this_to_a_long_random_secret
+          CLIENT_ORIGIN=http://localhost:5173
+          EOF
 
       - name: Install server dependencies
         run: npm ci
@@ -74,15 +84,42 @@ jobs:
         working-directory: e2e
         continue-on-error: true
 
+      - name: Debug Allure results (chromium)
+        if: always()
+        shell: bash
+        run: |
+          echo "Chromium allure-results listing:"
+          ls -lah e2e/allure-results || true
+          echo "Chromium json count:"
+          ls e2e/allure-results/*.json 2>/dev/null | wc -l || true
+
       - name: Run Playwright tests (firefox)
         run: npx playwright test --project=firefox
         working-directory: e2e
         continue-on-error: true
 
+      - name: Debug Allure results (firefox)
+        if: always()
+        shell: bash
+        run: |
+          echo "Firefox allure-results listing:"
+          ls -lah e2e/allure-results || true
+          echo "Firefox json count:"
+          ls e2e/allure-results/*.json 2>/dev/null | wc -l || true
+
       - name: Run Playwright tests (webkit)
         run: npx playwright test --project=webkit
         working-directory: e2e
         continue-on-error: true
+
+      - name: Debug Allure results (webkit)
+        if: always()
+        shell: bash
+        run: |
+          echo "Webkit allure-results listing:"
+          ls -lah e2e/allure-results || true
+          echo "Webkit json count:"
+          ls e2e/allure-results/*.json 2>/dev/null | wc -l || true
 
       - name: Load previous Allure history
         uses: actions/checkout@v4
